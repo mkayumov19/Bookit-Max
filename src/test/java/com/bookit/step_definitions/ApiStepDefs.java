@@ -12,9 +12,7 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
-
 import java.util.Map;
-
 import static io.restassured.RestAssured.*;
 
 public class ApiStepDefs {
@@ -143,13 +141,18 @@ public class ApiStepDefs {
                 .log().all()
                 .when()
                 .post(ConfigurationReader.get("qa2api.url") + path)
-                .then().log().all().extract().response();        ;
+                .then().log().all().extract().response();
 
     }
 
     @Then("I delete previously added student")
     public void i_delete_previously_added_student() {
         BookItApiUtil.deleteStudent(studentEmail,studentPassword);
+    }
+
+    @Given("I logged Bookit api as {string}")
+    public void iLoggedBookitApiAs(String role) {
+        token= BookItApiUtil.getTokenByRole(role);
     }
 
 }

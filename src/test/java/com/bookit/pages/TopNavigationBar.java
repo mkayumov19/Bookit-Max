@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public abstract class TopNavigationBar {
 	public TopNavigationBar() {
-		PageFactory.initElements(Driver.get(), this);
+		PageFactory.initElements(Driver.getDriver(), this);
 	}
 
 	@FindBy(linkText = "map")
@@ -33,19 +33,19 @@ public abstract class TopNavigationBar {
 	public WebElement signOut;
 
 	public void goToSelf() {
-		Actions actions = new Actions(Driver.get());
+		Actions actions = new Actions(Driver.getDriver());
 		actions.moveToElement(my).perform();
 		self.click();
 	}
 
 	public void goToTeam() {
-		Actions actions = new Actions(Driver.get());
+		Actions actions = new Actions(Driver.getDriver());
 		actions.moveToElement(my).perform();
 		team.click();
 	}
 
 	public void signOut() {
-		Actions actions = new Actions(Driver.get());
+		Actions actions = new Actions(Driver.getDriver());
 		actions.moveToElement(my).perform();
 		signOut.click();
 	}

@@ -25,7 +25,7 @@ public class Driver {
     // driver class will provide separate webdriver object per thread
     private static InheritableThreadLocal<WebDriver> driverPool = new InheritableThreadLocal<>();
 
-    public static WebDriver get() {
+    public static WebDriver getDriver() {
         //if this thread doesn't have driver - create it and add to pool
         if (driverPool.get() == null) {
 

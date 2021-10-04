@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MySelfPage extends TopNavigationBar {
 	public MySelfPage() {
-		PageFactory.initElements(Driver.get(), this);
+		PageFactory.initElements(Driver.getDriver(), this);
 	}
 	
 	@FindBy (xpath = "(//*[@class='title is-6'])[3]")

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 public class SignInPage {
 	
 	public SignInPage() {
-		PageFactory.initElements(Driver.get(), this);
+		PageFactory.initElements(Driver.getDriver(), this);
 	}	
 	
 	@FindBy(name="email")

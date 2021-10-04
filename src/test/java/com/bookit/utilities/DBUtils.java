@@ -17,16 +17,15 @@ public class DBUtils {
      *
      */
     public static void createConnection() {
-        String url = ConfigurationReader.get("dbUrl");
-        String username = ConfigurationReader.get("dbUsername");
-        String password = ConfigurationReader.get("dbPassword");
+        String url = Environment.DB_URL;
+        String username = Environment.DB_USERNAME;
+        String password = Environment.DB_PASSWORD;
         try {
             connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -43,11 +42,9 @@ public class DBUtils {
             if (connection != null) {
                 connection.close();
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -93,7 +90,6 @@ public class DBUtils {
         executeQuery(query);
         List<List<Object>> rowList = new ArrayList<>();
         ResultSetMetaData rsmd;
-
         try {
             rsmd = resultSet.getMetaData();
             while (resultSet.next()) {
@@ -101,17 +97,13 @@ public class DBUtils {
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                     row.add(resultSet.getObject(i));
                 }
-
                 rowList.add(row);
-
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return rowList;
-
     }
 
     /**
@@ -124,7 +116,6 @@ public class DBUtils {
         executeQuery(query);
         List<Object> rowList = new ArrayList<>();
         ResultSetMetaData rsmd;
-
         try {
             rsmd = resultSet.getMetaData();
             while (resultSet.next()) {
@@ -134,45 +125,34 @@ public class DBUtils {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return rowList;
-
     }
 
     /**
      *
      * @param query
      * @return returns query result in a list of maps where the list represents
-     *         collection of rows and a map represents represent a single row with
+     *         collection of rows and a map represents a single row with
      *         key being the column name
      */
     public static List<Map<String, Object>> getQueryResultMap(String query) {
         executeQuery(query);
         List<Map<String, Object>> rowList = new ArrayList<>();
         ResultSetMetaData rsmd;
-
         try {
             rsmd = resultSet.getMetaData();
-
             while (resultSet.next()) {
-
                 Map<String, Object> colNameValueMap = new HashMap<>();
-
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-
                     colNameValueMap.put(rsmd.getColumnName(i), resultSet.getObject(i));
                 }
-
                 rowList.add(colNameValueMap);
-
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return rowList;
-
     }
 
     /**
@@ -184,22 +164,17 @@ public class DBUtils {
         executeQuery(query);
         List<String> columns = new ArrayList<>();
         ResultSetMetaData rsmd;
-
         try {
             rsmd = resultSet.getMetaData();
             int columnCount = rsmd.getColumnCount();
-
             for (int i = 1; i <= columnCount; i++) {
                 columns.add(rsmd.getColumnName(i));
             }
-
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return columns;
-
     }
 
     private static void executeQuery(String query) {
@@ -218,12 +193,9 @@ public class DBUtils {
     }
 
     public static int getRowCount() throws Exception {
-
         resultSet.last();
-
         int rowCount = resultSet.getRow();
         return rowCount;
 
     }
-
 }
